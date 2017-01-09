@@ -9,6 +9,7 @@ import {
 } from 'react-native';
 
 import Header from '../components/header';
+import ProfileImage from '../components/profile';
 
 const {height, width} = Dimensions.get('window');
 
@@ -17,7 +18,8 @@ const PROFILE_PIC_WIDTH = height / 4.5;
 export default class Profile extends Component {
 	render() {
 		const {user} = this.props;
-		console.log("IN PROFILE: ", user)
+		console.log("IN PROFILE: ")
+		console.log(user)
 		return(
 			<View style={styles.container}>
 				<Header iconName={'ios-person'} />

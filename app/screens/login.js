@@ -9,6 +9,7 @@ import {
 
 import Exponent from 'exponent'
 import * as FirebaseAPI from '../modules/firebaseAPI'
+import firebase from 'firebase'
 import {Router} from '../../app'
 
 const APP_ID = '372366163116874';
@@ -38,6 +39,19 @@ export default class Login extends Component {
 
 	        FirebaseAPI.mergeUser(await user.uid, await response.json())
 	        	.then(() => console.log('merge success'), () => this.showError('Could not add you to database'))
+
+        	this.firebaseRef = firebase.database().ref('users')
+
+    		firebase.auth().onAuthStateChanged(fbAuth => {
+      			if (fbAuth) {  
+      				this.firebaseRef.child(fbAuth.uid).on('value', snap => {
+						const user = snap.val()
+						if (user != null) {
+							this.props.navigator.push(Router.getRoute('profile', {user}))
+						}
+					})
+				}
+			})
 		} else {
 			this.displayError('Facebook login failed')
 		}
