@@ -4,46 +4,45 @@ import {
   View,
   Image,
   Text,
+  TouchableOpacity, 
+  Dimensions,
 } from 'react-native';
 
-export default class Home extends Component {
+import Header from '../components/header';
+import ProfileImage from '../components/profileImage';
+
+const {height, width} = Dimensions.get('window');
+
+const PROFILE_PIC_WIDTH = height / 5;
+
+export default class Profile extends Component {
   render() {
+    const {user} = this.props;
+    console.log("IN PROFILE: ")
+    console.log(user)
     return(
-      <View style={{flex:1}}>
-        <View style={styles.header}>
-          <Text style={{fontSize:40, color:'#EA0059'}}>Grambler</Text>
-        </View>
-        <View style={styles.card}>
-          <Image
-            style={{flex:1}}
-            source={{uri: 'http://cdn.acidcow.com/pics/20100226/most_beautiful_men_70.jpg'}}
-          />
-          <View style={{margin:20}}>
-            <Text style={{fontSize:25}}>Hays, 19</Text>
-            <Text style={{fontSize:15}}>Superhuman</Text>
-          </View>
+      <View style={{flex: 1}}>
+        <Header facebookID={user.id} />
+        <View style={styles.container}>  
+          <Text style={styles.text}>
+            Welcome{'\n'}to{'\n'}DateGame!
+          </Text>
         </View>
       </View>
-      )
+    )
   }
 }
 
 const styles = StyleSheet.create({
-  header: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'white',
+  container: {
+    marginTop: 150,
+    height:height,
+    width:width,
+    backgroundColor:'white',
   },
-  card: {
-    flex: 5,
-    overflow: 'hidden',
-    backgroundColor: '#EA0059',
-    margin: 10,
-    marginBottom: 100,
-    borderWidth: 1,
-    borderColor: 'lightgrey',
-    borderRadius: 15
-  }
-})
-
+  text: {
+    color: '#2B2B2B',
+    fontSize: 48,
+    textAlign: 'center'
+  },
+});

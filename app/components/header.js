@@ -1,25 +1,33 @@
 import React, { Component } from 'react'
-import {View, StyleSheet, Dimensions, TouchableOpacity} from 'react-native'
+import {View, StyleSheet, Dimensions, TouchableOpacity, Image} from 'react-native'
 import {Ionicons} from '@exponent/vector-icons'
 
-const {height, width} = Dimensions.get('window');
 
-export default Header = ({iconName}) => {
+const {height, width} = Dimensions.get('window');
+const size = 50;
+
+export default Header = ({facebookID, style}) => {
+  const fbImageUrl = `https://graph.facebook.com/${facebookID}/picture?height=${35}`
+
   return (
     <View style={styles.container}>
-        <Ionicons name={iconName} size={44} color={'#FD6C69'} />  
+      <TouchableOpacity onPress={() => {}}>
+          <Image
+            resizeMode='cover'
+            source={{uri: fbImageUrl}}
+            style={[{width: size, height: size, borderRadius: size/2}, style]}/>
+      </TouchableOpacity>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-    marginTop:20,
+    marginTop:30,
+    justifyContent:'center',
     flexDirection:'row',
-    height:60,
-    width:width,
+    height: size,
+    width: width,
     backgroundColor:'transparent',
-    alignItems:'center',
-    justifyContent:'center'
   }
 })
