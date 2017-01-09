@@ -11,10 +11,21 @@ import {
 
 import HomeScreen from './screens/home'
 import LoginScreen from './screens/login'
+import ProfileScreen from './screens/profile'
+
+import * as firebase from 'firebase'
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBVB94M-JVYod9Q1l3dGPNfUJhiNL-PBik",
+  databaseURL: "https://dategame-4957f.firebaseio.com",
+} 
+
+firebase.initializeApp(firebaseConfig)
 
 export const Router = createRouter(() => ({
   home: () => HomeScreen,
   login: () => LoginScreen,
+  profile: () => ProfileScreen,
 }))
 
 export default class App extends Component {

@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 
 import Exponent from 'exponent'
+import * as FirebaseAPI from '../modules/firebaseAPI'
 import {Router} from '../../app'
 
 const APP_ID = '372366163116874';
@@ -24,20 +25,22 @@ export default class Login extends Component {
 	 }
 
 	fbLogin = async() => {
-	  const { type, token } = await Exponent.Facebook.logInWithReadPermissionsAsync(
-	    APP_ID, {
-	      permissions: ['public_profile', 'email', 'user_birthday'],
-	    });
-	  if (type === 'success') {
-        const fields = ['email','first_name','last_name', 'gender']
-        // facebook user data request
-        const response = await fetch(`https://graph.facebook.com/me?fields=${fields.toString()}&access_token=${token}`)
-        	.then(Alert.alert('Facebook login successful'))
+	 	const { type, token } = await Exponent.Facebook.logInWithReadPermissionsAsync(
+		    APP_ID, {
+		      permissions: ['public_profile', 'email', 'user_birthday'],
+		    });
+		if (type === 'success') {
+	        const fields = ['email','first_name','last_name', 'gender']
+	        // facebook user data request
+	        const response = await fetch(`https://graph.facebook.com/me?fields=${fields.toString()}&access_token=${token}`)
 
-    	this.props.navigator.push(Router.getRoute('home'))	
-      } else {
-        this.displayError('Facebook login failed')
-      }
+	        const user = await FirebaseAPI.loginUser(token)
+
+	        FirebaseAPI.mergeUser(await user.uid, await response.json())
+	        	.then(() => console.log('merge success'), () => this.showError('Could not add you to database'))
+		} else {
+			this.displayError('Facebook login failed')
+		}
     }
 
     render() {
