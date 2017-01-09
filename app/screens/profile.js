@@ -9,11 +9,11 @@ import {
 } from 'react-native';
 
 import Header from '../components/header';
-import ProfileImage from '../components/profile';
+import ProfileImage from '../components/profileImage';
 
 const {height, width} = Dimensions.get('window');
 
-const PROFILE_PIC_WIDTH = height / 4.5;
+const PROFILE_PIC_WIDTH = height / 5;
 
 export default class Profile extends Component {
 	render() {
@@ -22,12 +22,9 @@ export default class Profile extends Component {
 		console.log(user)
 		return(
 			<View style={styles.container}>
-				<Header iconName={'ios-person'} />
-				<TouchableOpacity onPress={()=>this.showlogoutAlert()}>
-					<Image style={{flex: 1, width: PROFILE_PIC_WIDTH, height: height}} source={{uri: 'http://cdn.acidcow.com/pics/20100226/most_beautiful_men_70.jpg'}} />
+				<TouchableOpacity onPress={() => {}}>
+					<ProfileImage style={styles.image} facebookID={user.id} size={PROFILE_PIC_WIDTH}/>
 				</TouchableOpacity>
-				<Text style={styles.name}>{user.first_name}</Text>
-     			<Text style={styles.work}>{user.bio}</Text>
 			</View>
 		)
 	}
@@ -39,6 +36,13 @@ const styles = StyleSheet.create({
     height:height,
     width:width,
     backgroundColor:'white',
+  },
+  image: {
+    marginTop:20,
+    flexDirection:'row',
+    backgroundColor:'transparent',
+    alignItems:'center',
+    justifyContent:'center'
   },
   name: {
     color: '#2B2B2B',

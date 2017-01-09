@@ -14,7 +14,7 @@ export default ({facebookID, size, style}) => {
     <Image
       resizeMode='cover'
       source={{uri: fbImageUrl}}
-      style={[{width:size, height:size, borderRadius:size/2},style]}/>
+      style={{width: size, height: size, borderRadius: 20}}/>
 	)
 }
   
