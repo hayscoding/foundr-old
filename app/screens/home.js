@@ -9,11 +9,9 @@ import {
 } from 'react-native';
 
 import Header from '../components/header';
-import ProfileImage from '../components/profileImage';
+import {Router} from '../../app'
 
 const {height, width} = Dimensions.get('window');
-
-const PROFILE_PIC_WIDTH = height / 5;
 
 export default class Profile extends Component {
   render() {
@@ -22,7 +20,9 @@ export default class Profile extends Component {
     console.log(user)
     return(
       <View style={{flex: 1}}>
-        <Header facebookID={user.id} />
+        <TouchableOpacity onPress={() => {this.props.navigator.push(Router.getRoute('profile', {user}))}}>
+          <Header facebookID={user.id} />
+        </TouchableOpacity>
         <View style={styles.container}>  
           <Text style={styles.text}>
             Welcome{'\n'}to{'\n'}DateGame!
