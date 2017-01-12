@@ -8,6 +8,9 @@ import {
   Dimensions,
 } from 'react-native';
 
+import BackHeader from '../components/backHeader'
+import {Router} from '../../app'
+
 const {height, width} = Dimensions.get('window');
 
 export default class Profile extends Component {
@@ -20,6 +23,9 @@ export default class Profile extends Component {
 
     return(
       <View style={{flex: 1}}>
+        <TouchableOpacity onPress={() => {this.props.navigator.push(Router.getRoute('home', {user}))}}>
+          <BackHeader iconName={'arrow-dropleft-circle'} />
+        </TouchableOpacity>
         <View style={styles.container}>  
           <Image 
             resizeMode='cover'
@@ -36,7 +42,7 @@ export default class Profile extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: height*.1,
+    marginTop: 60,
     height:height,
     width:width,
     backgroundColor:'white',

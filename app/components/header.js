@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import {View, StyleSheet, Dimensions, Image} from 'react-native'
-import {Ionicons} from '@exponent/vector-icons'
 
 const {height, width} = Dimensions.get('window');
 const size = 50;
