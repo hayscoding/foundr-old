@@ -12,6 +12,7 @@ import {
 import HomeScreen from './screens/home'
 import LoginScreen from './screens/login'
 import ProfileScreen from './screens/profile'
+import LoadingScreen from './screens/loading'
 
 import * as firebase from 'firebase'
 
@@ -26,6 +27,7 @@ export const Router = createRouter(() => ({
   home: () => HomeScreen,
   login: () => LoginScreen,
   profile: () => ProfileScreen,
+  loading: () => LoadingScreen,
 }))
 
 export default class App extends Component {
@@ -33,7 +35,7 @@ export default class App extends Component {
     return(
       <NavigationProvider router={Router}>
         <StatusBar barStyle="dark-content" />
-        <StackNavigation initialRoute={Router.getRoute('login')} />
+        <StackNavigation initialRoute={Router.getRoute('loading')} />
       </NavigationProvider>
       )
   }
