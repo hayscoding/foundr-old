@@ -24,7 +24,7 @@ export default class Profile extends Component {
     return(
       <View style={{flex: 1}}>
         <TouchableOpacity onPress={() => {this.props.navigator.push(Router.getRoute('home', {user}))}}>
-          <BackHeader iconName={'arrow-dropleft-circle'} />
+          <BackHeader />
         </TouchableOpacity>
         <View style={styles.container}>  
           <Image 
@@ -42,11 +42,11 @@ export default class Profile extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 60,
+    marginTop: 20,
     height:height,
     width:width,
     backgroundColor:'white',
-  },
+    },
   text: {
     color: '#2B2B2B',
     fontSize: 48,
