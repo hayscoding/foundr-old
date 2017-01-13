@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {
+  Alert,
   StyleSheet,
   Dimensions,
   View,
@@ -21,12 +22,18 @@ export default class DualCard extends Component {
     super(props)
   }
 
+  componenetWillUnmount() {
+    this.props.nextProfile(this.props.profileLeft, this.props.profileLeft.id)
+  }
+
   render() {
     const profileLeft = this.props.profileLeft 
     const profileRight = this.props.profileRight
+  
+    //Alert.alert(String(profileRight))
 
     const leftFbImageUrl = `https://graph.facebook.com/${profileLeft.id}/picture?height=${size}` 
-    const rightFbImageUrl = `https://graph.facebook.com/${profileRight.id}/picture?height=${width/3}` 
+    const rightFbImageUrl = `https://graph.facebook.com/${profileRight.id}/picture?height=${size}` 
 
     return (
       <View style={{flex: 1, justifyContent: 'space-around', alignItems: 'center'}}>

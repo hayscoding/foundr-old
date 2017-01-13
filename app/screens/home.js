@@ -82,12 +82,14 @@ export default class Profile extends Component {
         </TouchableOpacity>
         <View style={styles.container}> 
           {profiles.slice(profileIndex, profileIndex+1).map((profile, i, profileArray) => {
-            return <DualCard 
-              profileLeft={profile} 
-              profileRight= {profiles[profileIndex+1]} 
-              key={profileIndex + profileArray.length-i} 
-              nextProfile={(uid) => this.nextProfile(profile, uid)} />
-          })}
+              if(profiles.length > 1)
+                return <DualCard 
+                  profileLeft={profile} 
+                  profileRight={profiles[profileIndex+1]} 
+                  key={String(profileIndex) + String(profileIndex+1)} 
+                  nextProfile={(profile, profileId) => this.nextProfile(profile, profile.id)}/>
+                })
+          }
           <TouchableOpacity style={{alignItems: 'center'}} onPress={() => this.logout()}>
             <Text style={{marginTop: 30, fontSize: 40}}>Logout</Text>
           </TouchableOpacity>
