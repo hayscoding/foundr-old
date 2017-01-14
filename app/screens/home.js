@@ -77,7 +77,8 @@ export default class Profile extends Component {
 
     return(
       <View style={{flex: 1}}>
-        <TouchableOpacity style={{height:height/8}} onPress={() => {this.props.navigator.push(Router.getRoute('profile', {user}))}}>
+        <TouchableOpacity style={{height:height/8+5, borderBottomWidth: 3, borderColor: 'gray', backgroundColor: 'white'}}
+          onPress={() => {this.props.navigator.push(Router.getRoute('profile', {user}))}}>
           <Header facebookID={user.id} />
         </TouchableOpacity>
         <View style={styles.container}> 
@@ -90,7 +91,7 @@ export default class Profile extends Component {
                   nextProfile={(profile, profileId) => this.nextProfile(profile, profile.id)}/>
                 })
           }
-          <TouchableOpacity style={{alignItems: 'center'}} onPress={() => this.logout()}>
+          <TouchableOpacity style={{alignItems:'center'}} onPress={() => this.logout()}>
             <Text style={{marginTop: 30, fontSize: 40}}>Logout</Text>
           </TouchableOpacity>
         </View>
@@ -102,6 +103,8 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    borderTopWidth: 2,
+    borderColor: 'lightgrey',
     backgroundColor:'white',
   },
   text: {

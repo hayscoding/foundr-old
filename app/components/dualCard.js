@@ -36,21 +36,14 @@ export default class DualCard extends Component {
     const rightFbImageUrl = `https://graph.facebook.com/${profileRight.id}/picture?height=${size}` 
 
     return (
-      <View style={{flex: 1, justifyContent: 'space-around', alignItems: 'center'}}>
-        <View style={styles.imageContainerLeft}>
-          <Image
-            style= {styles.cardImage}
-            resizeMode='cover'
-            source={{uri: leftFbImageUrl}}
-          />
+      <View style={{flex: 2}}>
+        <View style={styles.containerTop}>
+          <Text style={styles.name}>{profileLeft.first_name}</Text>
+          <View style={styles.hr}></View>
         </View>
-        <View style={styles.hr}></View>
-        <View style={styles.imageContainerRight}>
-          <Image
-            style= {styles.cardImage}
-            resizeMode='cover'
-            source={{uri: rightFbImageUrl}}
-          />
+        <View style={styles.containerBottom}>
+          <Text style={styles.name}>{profileRight.first_name}</Text>
+          <View style={styles.hr}></View>
         </View>
       </View>
     )    
@@ -59,22 +52,28 @@ export default class DualCard extends Component {
  }
 
 const styles = StyleSheet.create({
-  imageContainerLeft: {
+  containerTop: {
+    flex: 1,
+    marginTop: 5,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     overflow: 'hidden',
-    borderTopRightRadius: 8,
-    borderTopLeftRadius: 8
+    borderBottomWidth: 1,
+    borderBottomColor: 'lightgray'
   },
-  imageContainerRight: {
+  containerBottom: {
+    flex: 1,
+    marginTop: 5,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
     overflow: 'hidden',
-    borderTopRightRadius: 8,
-    borderTopLeftRadius: 8
+    borderBottomWidth: 1,
+    borderBottomColor: 'gray'
   },
   cardImage: {
     width:size,
     height:size,
     alignSelf: 'center',
-    borderTopRightRadius: 8,
-    borderTopLeftRadius: 8
   },
   details: {
     justifyContent:'center',
@@ -82,15 +81,13 @@ const styles = StyleSheet.create({
   },
   name: {
     color: '#2B2B2B',
-    fontSize: 20
-  },
-  work: {
-    color: '#A4A4A4',
-    fontSize: 15
+    fontSize: 20,   
+    textAlign: 'center',
   },
   hr: {
-    width: width * 0.9,
+    width: width * 0.8,
     flexDirection: 'row',
+    alignSelf: 'center',
     borderWidth:  1,
     borderColor: 'lightgrey'
   },
