@@ -14,16 +14,17 @@ import {Router} from '../../app'
 const {height, width} = Dimensions.get('window');
 
 export default class Profile extends Component {
+
   render() {
-    const {user} = this.props;
-    console.log(user)
+    const profile = this.props.profile
+    const user = this.props.user
+    
 
-
-    const fbImageUrl = `https://graph.facebook.com/${user.id}/picture?height=${height}`
+    const fbImageUrl = `https://graph.facebook.com/${profile.id}/picture?height=${height}`
 
     return(
       <View style={{flex: 1}}>
-        <TouchableOpacity onPress={() => {this.props.navigator.push(Router.getRoute('home', {user}))}}>
+        <TouchableOpacity onPress={() => {this.props.navigator.push(Router.getRoute('home', {user: user}))}}>
           <BackHeader />
         </TouchableOpacity>
         <View style={styles.container}>  
@@ -31,8 +32,8 @@ export default class Profile extends Component {
             resizeMode='cover'
             source={{uri: fbImageUrl}}
             style={{width:width, height:height/2}} />
-          <Text style={styles.name}>{user.first_name}</Text>
-          <Text style={styles.work}>{user.bio}</Text>
+          <Text style={styles.name}>{profile.first_name}</Text>
+          <Text style={styles.work}>{profile.bio}</Text>
           <Text style={styles.bio}>The best of the best, forever and always</Text>
         </View>
       </View>

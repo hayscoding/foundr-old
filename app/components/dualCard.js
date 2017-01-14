@@ -6,12 +6,13 @@ import {
   View,
   Image,
   Text,
-  Animated,
-  PanResponder,
+  InteractionManager,
+  TouchableOpacity,
   PixelRatio
 } from 'react-native';
 
 import moment from 'moment'
+import {Router} from '../../app'
 
 const {height, width} = Dimensions.get('window');
 const ratio = PixelRatio.get() // get the pixel ratio so that we can calc optimum image size later
@@ -38,11 +39,15 @@ export default class DualCard extends Component {
     return (
       <View style={{flex: 2}}>
         <View style={styles.containerTop}>
-          <Text style={styles.name}>{profileLeft.first_name}</Text>
+          <TouchableOpacity onPress={() => {this.props.navigator.push(Router.getRoute('profile', {profile: profileLeft, user: this.props.user}))}}>
+            <Text style={styles.name}>{profileLeft.first_name}</Text>
+          </TouchableOpacity>
           <View style={styles.hr}></View>
         </View>
         <View style={styles.containerBottom}>
-          <Text style={styles.name}>{profileRight.first_name}</Text>
+          <TouchableOpacity onPress={() => {this.props.navigator.push(Router.getRoute('profile', {profile: profileRight, user: this.props.user}))}}>
+            <Text style={styles.name}>{profileRight.first_name}</Text>
+          </TouchableOpacity>
           <View style={styles.hr}></View>
         </View>
       </View>

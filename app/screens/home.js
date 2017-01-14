@@ -78,7 +78,7 @@ export default class Profile extends Component {
     return(
       <View style={{flex: 1}}>
         <TouchableOpacity style={{height:height/8+5, borderBottomWidth: 3, borderColor: 'gray', backgroundColor: 'white'}}
-          onPress={() => {this.props.navigator.push(Router.getRoute('profile', {user}))}}>
+          onPress={() => {this.props.navigator.push(Router.getRoute('profile', {profile: user, user: user}))}}>
           <Header facebookID={user.id} />
         </TouchableOpacity>
         <View style={styles.container}> 
@@ -87,8 +87,10 @@ export default class Profile extends Component {
                 return <DualCard 
                   profileLeft={profile} 
                   profileRight={profiles[profileIndex+1]} 
+                  user={user}
                   key={String(profileIndex) + String(profileIndex+1)} 
-                  nextProfile={(profile, profileId) => this.nextProfile(profile, profile.id)}/>
+                  nextProfile={(profile, profileId) => this.nextProfile(profile, profile.id)}
+                  navigator={this.props.navigator} />
                 })
           }
           <TouchableOpacity style={{alignItems:'center'}} onPress={() => this.logout()}>
