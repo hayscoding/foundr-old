@@ -18,13 +18,13 @@ export default class Profile extends Component {
   render() {
     const profile = this.props.profile
     const user = this.props.user
-    
+
 
     const fbImageUrl = `https://graph.facebook.com/${profile.id}/picture?height=${height}`
 
     return(
       <View style={{flex: 1}}>
-        <TouchableOpacity onPress={() => {this.props.navigator.push(Router.getRoute('home', {user: user}))}}>
+        <TouchableOpacity onPress={() => {this.props.navigator.pop()}}>
           <BackHeader />
         </TouchableOpacity>
         <View style={styles.container}>  

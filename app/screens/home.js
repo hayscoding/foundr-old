@@ -93,8 +93,8 @@ export default class Profile extends Component {
                   navigator={this.props.navigator} />
                 })
           }
-          <TouchableOpacity style={{alignItems:'center'}} onPress={() => this.logout()}>
-            <Text style={{marginTop: 30, fontSize: 40}}>Logout</Text>
+          <TouchableOpacity style={{justifyContent: 'flex-start', alignItems:'center'}} onPress={() => this.logout()}>
+            <Text style={{marginTop: 10, marginBottom: 20, fontSize: 40}}>Logout</Text>
           </TouchableOpacity>
         </View>
       </View>

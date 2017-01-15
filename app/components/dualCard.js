@@ -12,7 +12,9 @@ import {
 } from 'react-native';
 
 import moment from 'moment'
+
 import {Router} from '../../app'
+import Chat from './chat'
 
 const {height, width} = Dimensions.get('window');
 const ratio = PixelRatio.get() // get the pixel ratio so that we can calc optimum image size later
@@ -30,8 +32,6 @@ export default class DualCard extends Component {
   render() {
     const profileLeft = this.props.profileLeft 
     const profileRight = this.props.profileRight
-  
-    //Alert.alert(String(profileRight))
 
     const leftFbImageUrl = `https://graph.facebook.com/${profileLeft.id}/picture?height=${size}` 
     const rightFbImageUrl = `https://graph.facebook.com/${profileRight.id}/picture?height=${size}` 
@@ -39,16 +39,16 @@ export default class DualCard extends Component {
     return (
       <View style={{flex: 2}}>
         <View style={styles.containerTop}>
-          <TouchableOpacity onPress={() => {this.props.navigator.push(Router.getRoute('profile', {profile: profileLeft, user: this.props.user}))}}>
+          <TouchableOpacity style={styles.nameHeader} onPress={() => {this.props.navigator.push(Router.getRoute('profile', {profile: profileLeft}))}}>
             <Text style={styles.name}>{profileLeft.first_name}</Text>
           </TouchableOpacity>
-          <View style={styles.hr}></View>
+          <Chat uid={this.props.user.uid} profile={profileLeft} />
         </View>
         <View style={styles.containerBottom}>
-          <TouchableOpacity onPress={() => {this.props.navigator.push(Router.getRoute('profile', {profile: profileRight, user: this.props.user}))}}>
+          <TouchableOpacity style={styles.nameHeader} onPress={() => {this.props.navigator.push(Router.getRoute('profile', {profile: profileRight}))}}>
             <Text style={styles.name}>{profileRight.first_name}</Text>
           </TouchableOpacity>
-          <View style={styles.hr}></View>
+          <Chat uid={this.props.user.uid} profile={profileRight} />
         </View>
       </View>
     )    
@@ -89,11 +89,10 @@ const styles = StyleSheet.create({
     fontSize: 20,   
     textAlign: 'center',
   },
-  hr: {
+  nameHeader: {
     width: width * 0.8,
-    flexDirection: 'row',
     alignSelf: 'center',
-    borderWidth:  1,
+    borderBottomWidth:  1,
     borderColor: 'lightgrey'
   },
 });
