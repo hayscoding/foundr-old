@@ -30,9 +30,7 @@ export default class Profile extends Component {
       profiles: [],
       user: this.props.user,
     }
-  }
 
-  componentDidMount() {
     FirebaseAPI.watchUserLocationDemo(this.state.user.uid)
     FirebaseAPI.watchUser(this.state.user.uid, (user) => {
       if (user) {
@@ -41,10 +39,11 @@ export default class Profile extends Component {
           profileIndex: 0
         })
         FirebaseAPI.findProfiles(user, (profile) => {
-          const newProfiles = [...this.state.profiles, profile]
-          const filteredProfiles = filterProfiles(newProfiles, user)
+          if(canPassProfile(profile, user)) {
+            const profiles = [...this.state.profiles, profile]
 
-          this.setState({profiles:filteredProfiles})  
+            this.setState({profiles:profiles})
+          }  
         })
       }
     })
@@ -59,8 +58,7 @@ export default class Profile extends Component {
     })
   }
 
-  nextProfile(profile, profileUid) {
-    const userUid = this.state.user.uid
+  nextProfileIndex() {
     this.setState({
       profileIndex:this.state.profileIndex+1
     })
@@ -82,6 +80,10 @@ export default class Profile extends Component {
           <Header facebookID={user.id} />
         </TouchableOpacity>
         <View style={styles.container}> 
+          <TouchableOpacity style={{justifyContent: 'flex-start', alignItems:'center', borderBottomWidth: 2, borderColor: 'gray'}} 
+            onPress={() => this.props.navigator.push('questions', {user})}>
+            <Text style={{marginTop: 10, marginBottom: 20, fontSize: 40}}>Ask Question</Text>
+          </TouchableOpacity>
           {profiles.slice(profileIndex, profileIndex+1).map((profile, i, profileArray) => {
               if(profiles.length > 1)
                 return <DualCard 

@@ -26,7 +26,7 @@ export default class DualCard extends Component {
   }
 
   componenetWillUnmount() {
-    this.props.nextProfile(this.props.profileLeft, this.props.profileLeft.id)
+    //this.props.nextProfileIndex()
   }
 
   render() {

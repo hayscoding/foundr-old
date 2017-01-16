@@ -14,19 +14,19 @@ export const logoutUser = () => {
 }
 
 export const updateUser = (uid, key, value) => {
-  firebase.database().ref().child('users/'+uid)
+  firebase.database().ref().child('users').child(uid)
     .update({[key]:value})
 }
 
 export const selectQuestion = (uid, questionID) => {
   firebase.database().ref().child('users/'+uid)
-      .update({'selectedQuestion': questionID})
+      .update({'selected_question': questionID})
 }
 
 export const getQuestions = (func) => {
   return firebase.database().ref().child('questions').once('value', (snap) => {
     if (snap.val()) {
-      const questions = snap.val().slice(1,2);
+      const questions = snap.val().slice(1,5);
       func(questions)
     }})  
 }

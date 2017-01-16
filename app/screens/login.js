@@ -31,7 +31,7 @@ export default class Login extends Component {
 		      permissions: ['public_profile', 'email', 'user_birthday'],
 		    });
 		if (type === 'success') {
-	        const fields = ['email','first_name','last_name', 'gender']
+	        const fields = ['email','first_name','last_name', 'gender', 'selected_question']
 	        // facebook user data request
 	        const response = await fetch(`https://graph.facebook.com/me?fields=${fields.toString()}&access_token=${token}`)
 

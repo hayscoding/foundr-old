@@ -11,8 +11,8 @@ import {
   InteractionManager
 } from 'react-native'
 
-import Header from '../components/header'
-import DualCard from '../components/dualCard'
+import BackHeader from '../components/header'
+import Question from '../components/question'
 
 import {Router} from '../../app'
 import * as firebase from 'firebase'
@@ -28,9 +28,7 @@ export default class Profile extends Component {
       questions: [],
       user: this.props.user,
     }
-  }
 
-  componentDidMount() {
     FirebaseAPI.getQuestions((questions) => {
       this.setState({questions: questions})
     })
@@ -43,8 +41,11 @@ export default class Profile extends Component {
         () => console.log('signout successful'),
         () => console.log('signout not successful'))
     })
-  }
+  }  
 
+  selectQuestion(questionID) {
+    FirebaseAPI.selectQuestion(this.props.user.uid, questionID)
+  }
 
   render() {
     const {
@@ -53,15 +54,20 @@ export default class Profile extends Component {
     } = this.state
 
     return(
-      <View style={{flex: 1}}>
-        <TouchableOpacity style={{height:height/8+5, borderBottomWidth: 3, borderColor: 'gray', backgroundColor: 'white'}}
-          onPress={() => {this.props.navigator.push(Router.getRoute('profile', {profile: user, user: user}))}}>
-          <Header facebookID={user.id} />
+      <View style={{flex: 8}}>
+        <TouchableOpacity style={{borderBottomWidth: 3, borderColor: 'gray', backgroundColor: 'white'}}
+          onPress={() => {this.props.navigator.pop()}}>
+          <BackHeader />
         </TouchableOpacity>
         <View style={styles.container}> 
           {
             questions.map((question) => {
-              return <Text style={{marginTop: 10, marginBottom: 20, fontSize: 40}}>{question}</Text>
+              return (
+                <View style={styles.questionContainer} key={'view'+question.id}>
+                  <TouchableOpacity  onPress={this.selectQuestion(question.id)} key={'touchable'+question.id} >
+                    <Question question={question} key={question.id} />
+                  </TouchableOpacity>
+                </View>)
             })
           }
           <TouchableOpacity style={{justifyContent: 'flex-start', alignItems:'center'}} onPress={() => this.logout()}>
@@ -75,7 +81,7 @@ export default class Profile extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 6,
     borderTopWidth: 2,
     borderColor: 'lightgrey',
     backgroundColor:'white',
@@ -85,4 +91,11 @@ const styles = StyleSheet.create({
     fontSize: 48,
     textAlign: 'center'
   },
+  questionContainer: {
+    flex: 2,
+    marginTop: 5,
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    overflow: 'hidden',
+  }
 });
