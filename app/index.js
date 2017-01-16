@@ -13,6 +13,7 @@ import HomeScreen from './screens/home'
 import LoginScreen from './screens/login'
 import ProfileScreen from './screens/profile'
 import LoadingScreen from './screens/loading'
+import QuestionsScreen from './screens/questions'
 
 import * as firebase from 'firebase'
 
@@ -28,6 +29,7 @@ export const Router = createRouter(() => ({
   login: () => LoginScreen,
   profile: () => ProfileScreen,
   loading: () => LoadingScreen,
+  questions: () => QuestionsScreen,
 }))
 
 export default class App extends Component {

@@ -69,7 +69,7 @@ export default class Chat extends Component {
 
   render() {
     return (
-      <View style={{flex: 1, width: width, backgroundColor:'white'}}>
+      <View style={{flex: 1, flexDirection: 'row', width: width, backgroundColor:'white', justifyContent: 'center'}}>
         <GiftedChat
           messages={this.state.messages}
           onSend={(m) => this.onSend(m)}

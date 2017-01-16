@@ -4,7 +4,6 @@ import * as _ from 'lodash'
 import Exponent from 'exponent';
 
 export const loginUser = (accessToken) => {
-
     const provider = firebase.auth.FacebookAuthProvider //declare fb provider
     const credential = provider.credential(accessToken) //generate fb credential
     return firebase.auth().signInWithCredential(credential) // signin to firebase using facebook credential
@@ -17,6 +16,19 @@ export const logoutUser = () => {
 export const updateUser = (uid, key, value) => {
   firebase.database().ref().child('users/'+uid)
     .update({[key]:value})
+}
+
+export const selectQuestion = (uid, questionID) => {
+  firebase.database().ref().child('users/'+uid)
+      .update({'selectedQuestion': questionID})
+}
+
+export const getQuestions = (func) => {
+  return firebase.database().ref().child('questions').once('value', (snap) => {
+    if (snap.val()) {
+      const questions = snap.val().slice(1,2);
+      func(questions)
+    }})  
 }
 
 const setDemoRelations = (uid) => { // so demo users can test match screen
