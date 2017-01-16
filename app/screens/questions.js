@@ -11,7 +11,7 @@ import {
   InteractionManager
 } from 'react-native'
 
-import BackHeader from '../components/header'
+import BackHeader from '../components/backHeader'
 import Question from '../components/question'
 
 import {Router} from '../../app'
