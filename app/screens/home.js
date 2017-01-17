@@ -81,7 +81,7 @@ export default class Profile extends Component {
         </TouchableOpacity>
         <View style={styles.container}> 
           <TouchableOpacity style={{justifyContent: 'flex-start', alignItems:'center', borderBottomWidth: 2, borderColor: 'gray'}} 
-            onPress={() => this.props.navigator.push('questions', {user})}>
+            onPress={() => {this.props.navigator.push(Router.getRoute('questions', {user}))}}>
             <Text style={{marginTop: 10, marginBottom: 20, fontSize: 40}}>Ask Question</Text>
           </TouchableOpacity>
           {profiles.slice(profileIndex, profileIndex+1).map((profile, i, profileArray) => {

@@ -18,11 +18,6 @@ export const updateUser = (uid, key, value) => {
     .update({[key]:value})
 }
 
-export const selectQuestion = (uid, questionID) => {
-  firebase.database().ref().child('users/'+uid)
-      .update({'selected_question': questionID})
-}
-
 export const getQuestions = (func) => {
   return firebase.database().ref().child('questions').once('value', (snap) => {
     if (snap.val()) {

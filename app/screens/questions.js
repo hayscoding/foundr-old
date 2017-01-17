@@ -22,7 +22,7 @@ import filterProfiles from '../modules/filter'
 
 const {height, width} = Dimensions.get('window');
 
-export default class Profile extends Component {
+export default class Questions extends Component {
   componentWillMount() {
     this.state = { 
       questions: [],
@@ -34,23 +34,10 @@ export default class Profile extends Component {
     })
   }
 
-  logout () {
-    this.props.navigator.popToTop()
-    InteractionManager.runAfterInteractions(() => {
-      FirebaseAPI.logoutUser().then(
-        () => console.log('signout successful'),
-        () => console.log('signout not successful'))
-    })
-  }  
-
-  selectQuestion(questionID) {
-    FirebaseAPI.selectQuestion(this.props.user.uid, questionID)
-  }
-
   render() {
     const {
       questions,
-      user,
+      user
     } = this.state
 
     return(
@@ -62,12 +49,7 @@ export default class Profile extends Component {
         <View style={styles.container}> 
           {
             questions.map((question) => {
-              return (
-                <View style={styles.questionContainer} key={'view'+question.id}>
-                  <TouchableOpacity  onPress={this.selectQuestion(question.id)} key={'touchable'+question.id} >
-                    <Question question={question} key={question.id} />
-                  </TouchableOpacity>
-                </View>)
+              return <Question user={user} question={question} key={question.id} callback={() => {this.props.navigator.pop()}}/>
             })
           }
           <TouchableOpacity style={{justifyContent: 'flex-start', alignItems:'center'}} onPress={() => this.logout()}>
@@ -78,7 +60,6 @@ export default class Profile extends Component {
     )
   }
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 6,

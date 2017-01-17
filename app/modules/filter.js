@@ -2,8 +2,6 @@ import * as _ from 'lodash'
 import moment from 'moment'
 
 export default canPassProfile = (profile, user) => {
-  console.log("called")
-  console.log(profile)
   // User wants to see men and profile is male?
   const userShowMen = user.showMen && profile.gender == 'male'
   // User wants to see women and profile is female?
