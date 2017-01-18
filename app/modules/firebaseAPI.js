@@ -26,6 +26,10 @@ export const getQuestions = (func) => {
     }})  
 }
 
+export const getQuestion = (idString) => {
+  return firebase.database().ref().child('questions').child(idString)
+}
+
 const setDemoRelations = (uid) => { // so demo users can test match screen
   firebase.database().ref().child('relationships').child(uid).child('likedBack')
   .set({

@@ -17,7 +17,6 @@ export default class Profile extends Component {
 
   render() {
     const profile = this.props.profile
-    const user = this.props.user
 
 
     const fbImageUrl = `https://graph.facebook.com/${profile.id}/picture?height=${height}`
