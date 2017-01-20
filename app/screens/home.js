@@ -45,19 +45,24 @@ export default class Home extends Component {
           console.log(newProfiles)
           const filteredProfiles = filterProfiles(newProfiles, user)
           this.setState({profiles:filteredProfiles})  
+          
+          this.watchForQuestion()
         })
       }
-
-      if(user.gender == 'male' && this.state.profiles.length >= 2) {
-        const profile = this.state.profiles.find((profile) => {return profile.gender == 'female'})
-
-        FirebaseAPI.watchUser(profile.uid, (profile) => {
-          if(profile.selectedQuestion != '')
-            this.setState({question: profile.selectedQuestion})
-        })
-      }
-    })  
+    }) 
   }
+
+  watchForQuestion() {
+     const profile = this.state.user.gender == 'male' ? this.state.profiles.find((profile) => {return profile.gender == 'female'}) : this.state.user.uid
+
+      if(profile != null) {
+        console.log('profileeed')
+        firebase.database().ref().child('users/'+profile.uid).on('value', (snap) => {
+            console.log('watched complete')
+            FirebaseAPI.getQuestion(snap.val().selectedQuestion, (question) => this.setState({question: question.text}))
+        })
+      }
+    }
 
   logout () {
     this.props.navigator.popToTop()
@@ -81,7 +86,7 @@ export default class Home extends Component {
       const profile = this.state.profiles.find((profile) => {return profile.gender == 'female'})
 
 
-      if(profile.selectedQuestion != null) {
+      if(profile.selectedQuestion != 0) {
         if(this.state.question == '')
           FirebaseAPI.getQuestion(profile.selectedQuestion, (question) => this.setState({question: question.text}))
 
@@ -97,7 +102,7 @@ export default class Home extends Component {
 
     } else if(user.gender == 'female') {
       
-      if(user.selectedQuestion != null) {
+      if(user.selectedQuestion != 0) {
         if(this.state.question == '')
           FirebaseAPI.getQuestion(user.selectedQuestion, (question) => this.setState({question: question.text}))
 

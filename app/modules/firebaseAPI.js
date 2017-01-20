@@ -52,7 +52,8 @@ export const mergeUser = (uid, newData) => {
         ageRange: [18,24],
         uid: uid,
         birthday: "01/01/1992",
-        bio: 'App Developer'
+        bio: 'App Developer',
+        selectedQuestion: '0'
     }
     const current = snap.val()
     const mergedUser = {...defaults, ...current, ...newData}
