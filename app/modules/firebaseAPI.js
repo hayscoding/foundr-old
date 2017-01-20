@@ -19,15 +19,19 @@ export const updateUser = (uid, key, value) => {
 }
 
 export const getQuestions = (func) => {
-  return firebase.database().ref().child('questions').once('value', (snap) => {
+  firebase.database().ref().child('questions').once('value', (snap) => {
     if (snap.val()) {
       const questions = snap.val().slice(1,5);
       func(questions)
     }})  
 }
 
-export const getQuestion = (idString) => {
-  return firebase.database().ref().child('questions').child(idString)
+export const getQuestion = (idString, func) => {
+  firebase.database().ref().child('questions').child(idString).once('value', 
+    (snap) => { 
+      if(snap.val())
+        func(snap.val())
+    })
 }
 
 const setDemoRelations = (uid) => { // so demo users can test match screen
@@ -46,8 +50,6 @@ export const mergeUser = (uid, newData) => {
     const defaults = {
         maxDistance: 5,
         ageRange: [18,24],
-        showMen : newData.gender == 'female' ? true : false,
-        showWomen: newData.gender == 'male' ? true : false,
         uid: uid,
         birthday: "01/01/1992",
         bio: 'App Developer'
