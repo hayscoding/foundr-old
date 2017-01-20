@@ -29,7 +29,9 @@ export default class Question extends Component {
     return (
       <View style={styles.container}>
         <TouchableOpacity onPress={() => {this.selectQuestion()}}>
-          <Text style={styles.question}>{this.props.question.text}</Text>
+          <View>
+            <Text style={styles.question}>{this.props.question.text}</Text>
+          </View>
         </TouchableOpacity>
       </View> 
     )    

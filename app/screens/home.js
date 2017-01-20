@@ -47,7 +47,16 @@ export default class Home extends Component {
           this.setState({profiles:filteredProfiles})  
         })
       }
-    })
+
+      if(user.gender == 'male' && this.state.profiles.length >= 2) {
+        const profile = this.state.profiles.find((profile) => {return profile.gender == 'female'})
+
+        FirebaseAPI.watchUser(profile.uid, (profile) => {
+          if(profile.selectedQuestion != '')
+            this.setState({question: profile.selectedQuestion})
+        })
+      }
+    })  
   }
 
   logout () {
@@ -72,12 +81,15 @@ export default class Home extends Component {
       const profile = this.state.profiles.find((profile) => {return profile.gender == 'female'})
 
 
-      if(profile.selectedQuestion != null)
+      if(profile.selectedQuestion != null) {
+        if(this.state.question == '')
+          FirebaseAPI.getQuestion(profile.selectedQuestion, (question) => this.setState({question: question.text}))
+
         return(<TouchableOpacity style={styles.promptTouchable} 
                 onPress={() => {}}>
-                <Text style={styles.promptText}>{FirebaseAPI.getQuestion(profile.selectedQuestion).text}</Text>
+                <Text style={styles.promptText}>{this.state.question}</Text>
               </TouchableOpacity>)
-      else
+      } else
         return(<TouchableOpacity style={styles.promptTouchable} 
                 onPress={() => {}}>
                 <Text style={styles.promptText}>A Question is Being Chosen...</Text>
@@ -116,7 +128,7 @@ export default class Home extends Component {
                   </View>
                   <View style={styles.containerBottom}>
                     <TouchableOpacity style={styles.nameHeader} onPress={() => {this.props.navigator.push(Router.getRoute('profile', {profile: profile}))}}>
-                      <Text style={styles.name}>{profile.first_name}'s Answer</Text>
+                      <Text style={styles.name}>{profile.first_name} Answer</Text>
                     </TouchableOpacity>
                   </View>
                 </View>
@@ -178,7 +190,6 @@ export default class Home extends Component {
         <View style={{flex: 1}}>
           <TouchableOpacity style={{height:height/8+5, borderBottomWidth: 3, borderColor: 'gray', backgroundColor: 'white'}}
             onPress={() => {this.props.navigator.push(Router.getRoute('profile', {profile: user}))}}>
-            <Header facebookID={this.state.user.id} />
           </TouchableOpacity>
           <View style={styles.container}>
             <View style={{flex:1, alignItems:'center', justifyContent:'center'}}>
