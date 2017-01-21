@@ -53,7 +53,8 @@ export const mergeUser = (uid, newData) => {
         uid: uid,
         birthday: "01/01/1992",
         bio: 'App Developer',
-        selectedQuestion: '0'
+        selectedQuestion: '0',
+        answers: []
     }
     const current = snap.val()
     const mergedUser = {...defaults, ...current, ...newData}

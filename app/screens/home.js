@@ -14,6 +14,8 @@ import {
 
 import Header from '../components/header'
 import Matching from '../components/matching'
+import EnterAnswer from '../components/enterAnswer'
+import ViewAnswer from '../components/viewAnswer'
 
 import {Router} from '../../app'
 import * as firebase from 'firebase'
@@ -87,7 +89,7 @@ export default class Home extends Component {
 
 
       if(profile.selectedQuestion != 0) {
-        if(this.state.question == '')
+        if(this.state.question == '0')
           FirebaseAPI.getQuestion(profile.selectedQuestion, (question) => this.setState({question: question.text}))
 
         return(<TouchableOpacity style={styles.promptTouchable} 
@@ -130,11 +132,13 @@ export default class Home extends Component {
                     <TouchableOpacity style={styles.nameHeader} onPress={() => {this.props.navigator.push(Router.getRoute('profile', {profile: this.state.user}))}}>
                       <Text style={styles.name}>Your Answer</Text>
                     </TouchableOpacity>
+                    <EnterAnswer user={this.state.user} />
                   </View>
                   <View style={styles.containerBottom}>
                     <TouchableOpacity style={styles.nameHeader} onPress={() => {this.props.navigator.push(Router.getRoute('profile', {profile: profile}))}}>
                       <Text style={styles.name}>{profile.first_name} Answer</Text>
                     </TouchableOpacity>
+                    <ViewAnswer profile={profile} />
                   </View>
                 </View>
               </View>)
@@ -219,12 +223,13 @@ const styles = StyleSheet.create({
   promptText: {
     marginTop: 10, 
     marginBottom: 20, 
-    fontSize: 40,
+    fontSize: 32,
     textAlign: 'center'
   },
   promptTouchable: {
     justifyContent: 'flex-start',
     alignItems:'center', 
+    height: height/7,
     borderBottomWidth: 2, 
     borderColor: 'gray'
   },

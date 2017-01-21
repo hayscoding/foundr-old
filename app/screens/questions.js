@@ -15,6 +15,7 @@ import BackHeader from '../components/backHeader'
 import Question from '../components/question'
 
 import {Router} from '../../app'
+import { GiftedChat } from 'react-native-gifted-chat';
 import * as firebase from 'firebase'
 import * as FirebaseAPI from '../modules/firebaseAPI'
 

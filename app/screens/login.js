@@ -4,7 +4,8 @@ import {
   Text,
   View,
   Alert,
-  Button
+  TouchableOpacity,
+  Dimensions
 } from 'react-native';
 
 import Exponent from 'exponent'
@@ -13,6 +14,8 @@ import firebase from 'firebase'
 import {Router} from '../../app'
 
 const APP_ID = '372366163116874';
+
+const {height, width} = Dimensions.get('window');
 
 export default class Login extends Component {
 	displayError(messsage) {
@@ -60,9 +63,16 @@ export default class Login extends Component {
     render() {
 	    return (
 	      <View style={styles.container}>
-	      	<View style={styles.fbButton}>
-	      		<Button title={'Login'} accessibilityLabel={'Log in with Facebook'} onPress={this.fbLogin}/>
+	      	<View style={{flex: 1, justifyContent: 'center'}}>
+	      		<Text style={{textAlign: 'center', fontSize: 52, color: 'darkred'}}>
+	      			Welcome to DateGame!
+	      		</Text>
 	      	</View>
+	      	<View style={{flex: 1, justifyContent: 'center'}}>
+		      	<TouchableOpacity onPress={this.fbLogin}>
+		      		<Text style={styles.login}>Login with Facebook</Text>
+		      	</TouchableOpacity>
+      		</View>
 	      </View>
 	    );
   	}
@@ -70,13 +80,19 @@ export default class Login extends Component {
 
 const styles = StyleSheet.create({
   container: {
-  	flex: 1,
+  	flex: 2,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  fbButton: {
-  	width: 220, 
-  	height: 40,
-  	backgroundColor: 'lightblue', 
+  login: {
+  	width: width/2,
+  	textAlign: 'center', 
+  	color:'white', 
+  	fontSize:24, 
+  	backgroundColor: 'darkred',
+  	borderColor: 'darkred', 
+  	borderWidth: 1, 
+  	borderRadius: 10,
+  	overflow: 'hidden'
   }
 });
