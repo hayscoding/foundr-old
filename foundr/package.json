@@ -1,16 +1,32 @@
 {
   "name": "foundr",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.2.0",
-    "react-dom": "^16.2.0",
-    "react-scripts": "1.0.17"
-  },
+  "version": "1.0.0",
+  "description": "Find people to build things with",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/HaysS/foundr.git"
+  },
+  "author": "Hays Stanford",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/HaysS/foundr/issues"
+  },
+  "homepage": "https://github.com/HaysS/foundr#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "bootstrap": "^3.3.7",
+    "express": "^4.16.2",
+    "mongodb": "^3.0.0-rc0",
+    "mongoose": "^4.13.7",
+    "normalize.css": "^7.0.0",
+    "swagger-ui": "^3.6.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.5"
   }
 }

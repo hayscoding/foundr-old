@@ -9,14 +9,20 @@
     "@exponent/ex-navigation": "^2.7.1",
     "@exponent/vector-icons": "^2.0.3",
     "babel-preset-react-native-stage-0": "^1.0.1",
+    "body-parser": "^1.18.2",
     "expo-server-sdk": "^2.3.1",
     "exponent": "~12.0.3",
+    "express": "^4.16.2",
     "firebase": "^3.6.4",
     "geofire": "^4.1.2",
     "lodash": "^4.17.4",
     "moment": "^2.17.1",
+    "mongodb": "^3.0.0-rc0",
     "react": "~15.3.2",
     "react-native": "git+https://github.com/exponentjs/react-native#sdk-12.0.0",
     "react-native-gifted-chat": "0.0.10"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.5"
   }
 }
